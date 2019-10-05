@@ -3,6 +3,7 @@ const {series, watch, parallel, src, dest} = require('gulp');
 const browsersync = require('browser-sync').create();
 const ghPages = require('gulp-gh-pages');
 const sass = require('gulp-sass');
+const browserify = require('gulp-browserify');
 const minifyCSS = require('gulp-csso');
 const minifyJS = require('gulp-uglify');
 const minifyImg = require('gulp-imagemin');
@@ -34,7 +35,8 @@ function css() {
 }
 
 function js() {
-  return src('src/js/**/*.js')
+  return src('src/js/app.js')
+    .pipe(browserify())
     .pipe(concat('app.min.js'))
     .pipe(minifyJS())
     .pipe(dest('dist/js'))
@@ -74,7 +76,7 @@ function deploy() {
 };
 
 const build = series(clean, img, css, js, html, browserSync);
-const development = series(img, css, js, html, parallel(dev, browserSync));
+const development = series(clean, img, css, js, html, parallel(dev, browserSync));
 const deployTask = series(clean, img, css, js, html, parallel(deploy));
 
 exports.css = css;

@@ -27,3 +27,13 @@ $(document).ready(function () {
       }
     });
 });
+
+$(window).on('load', function () {
+  new Typed('#typed', {
+    strings: ['Yunus Emre.', 'Developer.', 'Deaf.'],
+    typeSpeed: 40,
+    backSpeed: 10,
+    loop: true,
+    backDelay: 700
+  });
+});

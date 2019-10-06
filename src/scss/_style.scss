@@ -41,6 +41,11 @@ body {
         font-weight: bold;
         color: $white;
         text-align: center;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
       }
     }
   }
@@ -158,6 +163,14 @@ body {
 
     &::placeholder {
       color: $white;
+    }
+
+    &:focus {
+      color: $light-blue;
+
+      border-color: $navy-blue;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(2, 83, 179, 0.6);
     }
   }
 

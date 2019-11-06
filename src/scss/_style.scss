@@ -52,9 +52,11 @@ body {
 }
 
 .about-me {
-  padding-top: 20vh;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: $navy-blue;
 
   h1 {
@@ -82,11 +84,15 @@ body {
       box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
     }
   }
+
+  @include media-breakpoint-down(md) {
+    padding: 20vh 0;
+  }
 }
 
 .skills {
-  padding-top: 10vh;
-  height: 100vh;
+  padding: 10vh 0;
+  min-height: 100vh;
   background-color: $light-gray;
   color: $light-blue;
   text-align: center;
@@ -189,8 +195,16 @@ body {
 
     &:hover {
       background-color: $white;
-      color: $light-blue;
+      color: $light-blue !important;
     }
+
+    &:focus {
+      color: $white;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 100px 0px;
   }
 }
 

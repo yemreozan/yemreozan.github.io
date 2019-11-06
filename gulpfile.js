@@ -72,7 +72,7 @@ function dev() {
 
 function deploy() {
   return src('dist/**/*')
-    .pipe(ghPages());
+    .pipe(ghPages({ branch: 'master' }));
 };
 
 const build = series(clean, img, css, js, html, browserSync);

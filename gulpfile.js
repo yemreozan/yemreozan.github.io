@@ -53,6 +53,11 @@ function html() {
     .pipe(browsersync.stream());
 }
 
+function font() {
+  return src('src/font/**/*.{eot,svg,ttf,woff,woff2}')
+    .pipe(dest('dist/font'));
+};
+
 function img() {
   return src('src/img/**/*')
     .pipe(minifyImg())
@@ -75,14 +80,15 @@ function deploy() {
     .pipe(ghPages({ branch: 'master' }));
 };
 
-const build = series(clean, img, css, js, html, browserSync);
-const development = series(clean, img, css, js, html, parallel(dev, browserSync));
-const deployTask = series(clean, img, css, js, html, parallel(deploy));
+const build = series(clean, img, font, css, js, html, browserSync);
+const development = series(clean, img, font, css, js, html, parallel(dev, browserSync));
+const deployTask = series(clean, img, font, css, js, html, parallel(deploy));
 
 exports.css = css;
 exports.js = js;
 exports.html = html;
 exports.img = img;
+exports.font = font;
 exports.clean = clean;
 exports.browserSync = browserSync;
 exports.development = development;

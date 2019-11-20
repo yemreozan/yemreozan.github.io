@@ -28,6 +28,54 @@ $(document).ready(function () {
     });
 
   $('[data-toggle="tooltip"]').tooltip();
+
+  $('#send-button').click(function () {
+
+    var data = {
+      name: $('input[name=name]').val(),
+      email: $('input[name=email]').val(),
+      message: $('textarea[name=message]').val()
+    };
+
+    if (validate(data)) {
+      $.ajax({
+        url: 'https://api.yemreozan.com/sendMail',
+        type: 'POST',
+        data: data,
+        dataType: 'JSON',
+        statusCode: {
+          200: function () {
+            alert('working!');
+          },
+          400: function () {
+            alert('Not working!');
+          }
+        },
+        error: function () {
+          alert('Bad connection!');
+        }
+      });
+    }
+  });
+
+  function validate(data) {
+    if (data.name.length < 3) {
+      return false;
+    }
+    if (!validateEmail(data.email)) {
+      return false;
+    }
+    if (data.message.length < 3) {
+      return false;
+    }
+
+    return true;
+  };
+
+  function validateEmail(email) {
+    var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+  }
 });
 
 $(window).on('load', function () {

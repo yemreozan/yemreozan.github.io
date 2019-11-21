@@ -1,4 +1,4 @@
-const {series, watch, parallel, src, dest} = require('gulp');
+const { series, watch, parallel, src, dest } = require('gulp');
 
 const browsersync = require('browser-sync').create();
 const ghPages = require('gulp-gh-pages');
@@ -64,6 +64,11 @@ function img() {
     .pipe(dest('dist/img'));
 }
 
+function moveFiles() {
+  return src('CNAME')
+    .pipe(dest('dist'));
+}
+
 function clean() {
   return del(['dist/css', 'dist/js', 'dist/img', 'dist/**/*.html']);
 };
@@ -82,7 +87,7 @@ function deploy() {
 
 const build = series(clean, img, font, css, js, html, browserSync);
 const development = series(clean, img, font, css, js, html, parallel(dev, browserSync));
-const deployTask = series(clean, img, font, css, js, html, parallel(deploy));
+const deployTask = series(clean, img, font, css, js, html, moveFiles, parallel(deploy));
 
 exports.css = css;
 exports.js = js;

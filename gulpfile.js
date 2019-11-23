@@ -2,6 +2,7 @@ const { series, watch, parallel, src, dest } = require('gulp');
 
 const browsersync = require('browser-sync').create();
 const ghPages = require('gulp-gh-pages');
+const ftp = require( 'vinyl-ftp' );
 const sass = require('gulp-sass');
 const browserify = require('gulp-browserify');
 const minifyCSS = require('gulp-csso');
@@ -70,7 +71,7 @@ function moveFiles() {
 }
 
 function clean() {
-  return del(['dist/css', 'dist/js', 'dist/img', 'dist/**/*.html']);
+  return del(['dist']);
 };
 
 function dev() {
@@ -80,14 +81,33 @@ function dev() {
   watch('src/**/*.html', html);
 };
 
-function deploy() {
+function stagingDeploy() {
   return src('dist/**/*')
     .pipe(ghPages({ branch: 'master' }));
 };
 
+function productionDeploy() {
+  const host = process.env.FTP_HOST;
+  const user = process.env.FTP_USER;
+  const password = process.env.FTP_PASSWORD;
+  const port = process.env.FTP_PORT;
+
+  const connection = ftp.create({
+    host: host,
+    user: user,
+    password: password,
+    port: port,
+  });
+
+  return src('dist/**/*', { base: '.', buffer: false })
+    .pipe(connection.newer('public_html/beta'))
+    .pipe(connection.dest('public_html/beta'));
+};
+
 const build = series(clean, img, font, css, js, html, browserSync);
 const development = series(clean, img, font, css, js, html, parallel(dev, browserSync));
-const deployTask = series(clean, img, font, css, js, html, moveFiles, parallel(deploy));
+const staging = series(clean, img, font, css, js, html, moveFiles, parallel(stagingDeploy));
+const production = series(clean, img, font, css, js, html, parallel(productionDeploy));
 
 exports.css = css;
 exports.js = js;
@@ -97,5 +117,6 @@ exports.font = font;
 exports.clean = clean;
 exports.browserSync = browserSync;
 exports.development = development;
-exports.deploy = deployTask;
+exports.staging = staging;
+exports.production = production;
 exports.default = build;

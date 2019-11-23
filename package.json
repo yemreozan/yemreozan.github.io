@@ -32,7 +32,8 @@
     "gulp-uglify": "^3.0.2",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
-    "typed.js": "^2.0.11"
+    "typed.js": "^2.0.11",
+    "vinyl-ftp": "^0.6.1"
   },
   "dependencies": {}
 }

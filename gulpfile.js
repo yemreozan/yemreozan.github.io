@@ -1,4 +1,5 @@
 const { series, watch, parallel, src, dest } = require('gulp');
+require('dotenv').config();
 
 const browsersync = require('browser-sync').create();
 const ghPages = require('gulp-gh-pages');

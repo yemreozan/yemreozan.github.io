@@ -49,6 +49,19 @@ body {
       }
     }
   }
+
+  @include media-breakpoint-down(sm) {
+    h2 {
+      font-size: 72px;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    h2 {
+      font-size: 48px;
+    }
+  }
+
 }
 
 .about-me {
@@ -87,6 +100,36 @@ body {
 
   @include media-breakpoint-down(md) {
     padding: 20vh 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    h1 {
+      font-size: 64px;
+    }
+
+    .summary {
+      font-size: 28px;
+      margin-bottom: 23px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    h1 {
+      font-size: 48px;
+    }
+
+    .summary {
+      font-size: 24px;
+      margin-bottom: 23px;
+    }
+
+    p {
+      font-size: 18px;
+    }
   }
 }
 
@@ -136,6 +179,28 @@ body {
       img {
         filter: grayscale(0%);
       }
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    h1 {
+      font-size: 64px;
+    }
+
+    p {
+      font-size: 28px;
+      margin-bottom: 23px;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    h1 {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 24px;
+      margin-bottom: 23px;
     }
   }
 }
@@ -206,6 +271,28 @@ body {
   @include media-breakpoint-down(md) {
     padding: 100px 0px;
   }
+
+  @include media-breakpoint-down(sm) {
+    h1 {
+      font-size: 64px;
+    }
+
+    p {
+      font-size: 28px;
+      margin-bottom: 23px;
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    h1 {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 24px;
+      margin-bottom: 23px;
+    }
+  }
 }
 
 footer {
@@ -245,5 +332,11 @@ footer {
   p {
     margin-bottom: 0px;
     text-align: right;
+  }
+
+  @include media-breakpoint-down(sm) {
+    p {
+      text-align: center;
+    }
   }
 }

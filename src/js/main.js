@@ -38,6 +38,8 @@ $(document).ready(function () {
     };
 
     if (validate(data)) {
+      $('#send-button').prop('disabled', true);
+
       $.ajax({
         url: 'https://api.yemreozan.com/sendMail',
         type: 'POST',
@@ -45,13 +47,24 @@ $(document).ready(function () {
         dataType: 'JSON',
         statusCode: {
           200: function () {
-            alert('working!');
+            $('#send-button').prop('disabled', false);
+            $('#send-button').text('done');
+
+            setTimeout(function () {
+              $('#send-button').text('send');
+            }, 3000);
           },
           400: function () {
-            alert('Not working!');
+            $('#send-button').prop('disabled', false);
+            $('#send-button').text('fail');
+
+            setTimeout(function () {
+              $('#send-button').text('send');
+            }, 3000);
           }
         },
         error: function () {
+          $('#send-button').prop('disabled', false);
           alert('Bad connection!');
         }
       });
@@ -59,17 +72,36 @@ $(document).ready(function () {
   });
 
   function validate(data) {
+    var animated = 'animated shake';
+    var animatedEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
+    var isValid = true;
+
     if (data.name.length < 3) {
-      return false;
-    }
-    if (!validateEmail(data.email)) {
-      return false;
-    }
-    if (data.message.length < 3) {
-      return false;
+      $('input[name=name]').addClass(animated).one(animatedEnd, function () {
+        $('input[name=name]').removeClass(animated);
+      });
+
+      isValid = false;
     }
 
-    return true;
+    if (!validateEmail(data.email)) {
+      $('input[name=email]').addClass(animated).one(animatedEnd, function () {
+        $('input[name=email]').removeClass(animated);
+      });
+
+      isValid = false;
+    }
+
+    if (data.message.length < 3) {
+      $('textarea[name=message]').addClass(animated).one(animatedEnd, function () {
+        $('textarea[name=message]').removeClass(animated);
+      });
+
+      isValid = false;
+    }
+
+    return isValid;
   };
 
   function validateEmail(email) {

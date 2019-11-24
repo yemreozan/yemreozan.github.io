@@ -17,6 +17,7 @@
   },
   "homepage": "https://yemreozan.github.io",
   "devDependencies": {
+    "animate-sass": "^0.8.2",
     "bootstrap": "^4.3.1",
     "browser-sync": "^2.26.7",
     "del": "^5.1.0",

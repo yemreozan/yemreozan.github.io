@@ -259,8 +259,14 @@ body {
     transition: all .3s ease-in-out;
 
     &:hover {
-      background-color: $white;
-      color: $light-blue !important;
+      &:not(:disabled){
+        background-color: $white;
+        color: $light-blue !important;
+      }
+
+      &:disabled {
+        color: $white;
+      }
     }
 
     &:focus {

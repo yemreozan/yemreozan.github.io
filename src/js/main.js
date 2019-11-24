@@ -47,25 +47,26 @@ $(document).ready(function () {
         dataType: 'JSON',
         statusCode: {
           200: function () {
-            $('#send-button').prop('disabled', false);
             $('#send-button').text('done');
 
             setTimeout(function () {
+              $('#send-button').prop('disabled', false);
               $('#send-button').text('send');
+              cleanForm();
             }, 3000);
           },
           400: function () {
-            $('#send-button').prop('disabled', false);
             $('#send-button').text('fail');
 
             setTimeout(function () {
+              $('#send-button').prop('disabled', false);
               $('#send-button').text('send');
             }, 3000);
           }
         },
         error: function () {
           $('#send-button').prop('disabled', false);
-          alert('Bad connection!');
+          alert('Fail connection!');
         }
       });
     }
@@ -107,6 +108,12 @@ $(document).ready(function () {
   function validateEmail(email) {
     var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);
+  }
+
+  function cleanForm() {
+    $('input[name=name]').val('');
+    $('input[name=email]').val('');
+    $('textarea[name=message]').val('');
   }
 });
 

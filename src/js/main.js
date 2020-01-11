@@ -39,6 +39,7 @@ $(document).ready(function () {
 
     if (validate(data)) {
       $('#send-button').prop('disabled', true);
+      $('#send-button').text('sending');
 
       $.ajax({
         url: 'https://api.yemreozan.com/sendMail',

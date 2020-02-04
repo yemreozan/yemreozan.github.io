@@ -10,6 +10,7 @@ const minifyCSS = require('gulp-csso');
 const minifyJS = require('gulp-uglify');
 const minifyImg = require('gulp-imagemin');
 const minifyHTML = require('gulp-htmlmin');
+const webp = require('gulp-webp');
 const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const del = require('del');
@@ -63,11 +64,12 @@ function font() {
 function img() {
   return src('src/img/**/*')
     .pipe(minifyImg())
+    .pipe(webp({ quality: 100 }))
     .pipe(dest('dist/img'));
 }
 
 function moveFiles() {
-  return src('CNAME')
+  return src(['CNAME','robots.txt'])
     .pipe(dest('dist'));
 }
 
@@ -105,7 +107,7 @@ function productionDeploy() {
     .pipe(connection.dest('public_html/beta'));
 };
 
-const build = series(clean, img, font, css, js, html, browserSync);
+const build = series(clean, img, font, css, js, html, moveFiles, browserSync);
 const development = series(clean, img, font, css, js, html, parallel(dev, browserSync));
 const staging = series(clean, img, font, css, js, html, moveFiles, parallel(stagingDeploy));
 const production = series(clean, img, font, css, js, html, parallel(productionDeploy));

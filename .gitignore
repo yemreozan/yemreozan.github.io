@@ -1,5 +1,6 @@
 .idea/
 .publish/
+.firebase/
 dist/
 node_modules/
 .env

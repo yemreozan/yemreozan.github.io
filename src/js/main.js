@@ -30,7 +30,6 @@ $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
 
   $('#send-button').click(function () {
-
     var data = {
       name: $('input[name=name]').val(),
       email: $('input[name=email]').val(),
@@ -119,6 +118,7 @@ $(document).ready(function () {
 });
 
 $(window).on('load', function () {
+  $('#pre-loader').delay(100).fadeOut('slow');
   new Typed('#typed', {
     strings: ['Yunus Emre.', 'Developer.', 'Deaf.'],
     typeSpeed: 40,

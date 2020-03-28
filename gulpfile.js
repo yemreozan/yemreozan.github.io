@@ -10,7 +10,6 @@ const minifyCSS = require('gulp-csso');
 const minifyJS = require('gulp-uglify');
 const minifyImg = require('gulp-imagemin');
 const minifyHTML = require('gulp-htmlmin');
-const webp = require('gulp-webp');
 const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const del = require('del');
@@ -64,7 +63,6 @@ function font() {
 function img() {
   return src('src/img/**/*')
     .pipe(minifyImg())
-    .pipe(webp({ quality: 100 }))
     .pipe(dest('dist/img'));
 }
 

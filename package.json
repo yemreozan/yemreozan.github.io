@@ -32,7 +32,6 @@
     "gulp-imagemin": "^6.1.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "gulp-webp": "^4.0.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "typed.js": "^2.0.11",

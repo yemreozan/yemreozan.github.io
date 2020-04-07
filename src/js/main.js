@@ -41,10 +41,11 @@ $(document).ready(function () {
       $('#send-button').text('sending');
 
       $.ajax({
-        url: 'https://api.yemreozan.com/sendMail',
+        url: 'https://yemreozan-api.herokuapp.com/sendMail',
         type: 'POST',
-        data: data,
+        data: JSON.stringify(data),
         dataType: 'JSON',
+        contentType: 'application/json',
         statusCode: {
           200: function () {
             $('#send-button').text('done');

@@ -29,6 +29,28 @@ $(document).ready(function () {
 
   $('[data-toggle="tooltip"]').tooltip();
 
+  var targets = document.querySelectorAll('img');
+
+  function lazyLoad(target) {
+    var io = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          var src = img.getAttribute('data-lazy');
+
+          img.setAttribute('src',src);
+          img.classList.add('fade');
+
+          observer.disconnect();
+        }
+      });
+    });
+
+    io.observe(target);
+  }
+
+  targets.forEach(lazyLoad);
+
   $('#send-button').click(function () {
     var data = {
       name: $('input[name=name]').val(),

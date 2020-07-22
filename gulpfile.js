@@ -105,7 +105,7 @@ function productionDeploy() {
     .pipe(connection.dest('public_html/beta'));
 };
 
-const build = series(clean, img, font, css, js, html, moveFiles, browserSync);
+const build = series(clean, img, font, css, js, html, moveFiles);
 const development = series(clean, img, font, css, js, html, parallel(dev, browserSync));
 const staging = series(clean, img, font, css, js, html, moveFiles, parallel(stagingDeploy));
 const production = series(clean, img, font, css, js, html, parallel(productionDeploy));

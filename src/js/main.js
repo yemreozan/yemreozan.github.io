@@ -63,7 +63,7 @@ $(document).ready(function () {
       $('#send-button').text('sending');
 
       $.ajax({
-        url: 'https://yemreozan-api.herokuapp.com/sendMail',
+        url: 'https://api.yemreozan.com/sendMail',
         type: 'POST',
         data: JSON.stringify(data),
         dataType: 'JSON',
